@@ -2,6 +2,7 @@ package com.example.kotlin_retrofit
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,20 +40,19 @@ class MainActivity : ComponentActivity() {
 
         val rfData = rfBuilder.getData()
 
-        rfData.enqueue(object : Callback<List<MyData>?> {
-            override fun onResponse(call: Call<List<MyData>?>, response: Response<List<MyData>?>) {
+        rfData.enqueue(object : Callback<List<MyDataItem>?> {
+            override fun onResponse(call: Call<List<MyDataItem>?>, response: Response<List<MyDataItem>?>) {
                 val responseBody = response.body()!!
 
                 val myStringBuilder = StringBuilder()
                 for(myData in responseBody){
-                    myStringBuilder.append(myData)
-                    Log.d("mainactivityResponse", "myStringBuilder")
+                    myStringBuilder.append(myData.id)
                     myStringBuilder.append("\n")
                 }
                 binding.txtID.text = myStringBuilder
             }
 
-            override fun onFailure(call: Call<List<MyData>?>, t: Throwable) {
+            override fun onFailure(call: Call<List<MyDataItem>?>, t: Throwable) {
                 Log.d("mainactivity", "onFailure " +t.message)
             }
         })

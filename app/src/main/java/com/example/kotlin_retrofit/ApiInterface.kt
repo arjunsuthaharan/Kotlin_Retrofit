@@ -7,5 +7,5 @@ interface ApiInterface {
 
 
     @GET("posts")
-    fun getData(): Call<List<MyData>>
+    fun getData(): Call<List<MyDataItem>>
 }
